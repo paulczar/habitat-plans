@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+
+exec 2>&1
+
+mkdir -p {{pkg.path}}/conf.d
+mkdir -p {{pkg.path}}/data
+mkdir -p {{pkg.path}}/run
+mkdir -p {{pkg.path}}/tmp
+mkdir -p {{pkg.path}}/log
+
+chown -R hab:hab {{pkg.path}}/data
+chown -R hab:hab {{pkg.path}}/run
+chown -R hab:hab {{pkg.path}}/tmp
+chown -R hab:hab {{pkg.path}}/log
+
+ln -s /dev/stdout {{pkg.path}}/log/mysql.log
+
+if [[ ! -f "{{pkg.svc_data_path}}/mysql" ]]; then
+  chpst -u hab:hab scripts/mysql_install_db \
+  --basedir={{pkg.svc_path}}
+fi
+
+#  echo " Database does not exist, creating with 'initdb'"
+#  chpst -u hab:hab initdb -U {{cfg.initdb_superuser_name}} \
+#                            -E {{cfg.initdb_encoding}} \
+#                            -D {{pkg.svc_data_path}} \
+#                            --pwfile {{cfg.initdb_pwfile}} && \
+#    rm {{pkg.svc_config_path}}/pwfile
+#fi

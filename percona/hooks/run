@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+
+export MYSQL_HOME{{pkg.path}}/config
+
+exec 2>&1
+exec {{pkg.path}}/bin/mysqld_safe --datadir='./data' --user=hab
