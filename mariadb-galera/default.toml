@@ -1,0 +1,13 @@
+# default database to create in mysql for your app
+database = "habitat"
+
+# default remote admin credentials for mysql
+mysql_user = "habitat"
+mysql_pass = "habitat"
+
+# default name for galera replication cluster
+wsrep_cluster_name = "habitat"
+
+# username and password for galera replication
+wsrep_user = "replica"
+wsrep_pass = "replica"
